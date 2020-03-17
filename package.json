@@ -1,0 +1,12 @@
+{
+  "name": "account-books",
+  "version": "1.0.0",
+  "description": "vue+node 第一个实战项目",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "wyb",
+  "license": "ISC"
+}
