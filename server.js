@@ -7,6 +7,9 @@ const mongoose = require("mongoose");
 //* 引入分离出去的数据库接口
 const db = require("./config/keys").mongoURL
 
+//* 引入passport
+const passport = require("passport")
+
 //* 实例化一个express
 const app = express();
 
@@ -15,6 +18,12 @@ const port = process.env.PORT || 5002;
 
 //* 引入users模块
 const users = require("./routers/api/users")
+
+//* 引入profiles模块
+const profiles = require("./routers/api/profiles")
+
+//* 引入body-parser包
+const bodyParser = require("body-parser")
 
 //* mongodb+srv://wyb:wyb123..@cluster0-afwz7.mongodb.net/test?retryWrites=true&w=majority
 
@@ -32,6 +41,20 @@ mongoose.connect(db, {
         console.log(err);
     })
 
+
+//* 使用body-parse
+//* parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+
+//* parse application/json
+app.use(bodyParser.json())
+
+// * 初始化passport
+app.use(passport.initialize())
+
+//* 引入并且执行暴露出去的passport函数
+require("./config/passport")(passport)
+
 //* 配置根路由
 app.get("/", (req, res) => {
     res.send("hello world")
@@ -39,6 +62,9 @@ app.get("/", (req, res) => {
 
 //* 挂载users模块
 app.use("/api/users", users)
+
+//* 挂载profiles模块
+app.use("/api/profiles", profiles)
 
 //* 监听设置好的端口
 app.listen(port, () => {
