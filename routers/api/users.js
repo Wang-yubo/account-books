@@ -26,9 +26,9 @@ const key = require("../../config/keys").secretorKey
 const passport = require("passport")
 
 //* 配置路由
-router.get("/", (req, res) => {
+router.get('/', (req, res) => {
     res.json({
-        msg: "这个是测试数据"
+        tip: "Fuck"
     })
 })
 
@@ -63,7 +63,7 @@ router.post("/register", (req, res) => {
                     // console.log(salt);
                     bcrypt.hash(newUser.password, salt, function(err, hash) {
                         // Store hash in your password DB.
-                        if (err) throw err
+                        if (err) console.log(err)
                             // console.log(hash);
                         newUser.password = hash;
                         //* 保存用户的注册信息

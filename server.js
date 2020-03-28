@@ -16,6 +16,9 @@ const app = express();
 //* 设置端口,使用设置好的端口,如果没有就时使用5002
 const port = process.env.PORT || 5002;
 
+//*
+const api = require('./routers/api')
+
 //* 引入users模块
 const users = require("./routers/api/users")
 
@@ -32,7 +35,8 @@ const bodyParser = require("body-parser")
 mongoose.connect(db, {
         //* 最好再设置上提示的这两条
         useNewUrlParser: true,
-        useUnifiedTopology: true
+        useUnifiedTopology: true,
+        useFindAndModify: false
     }) //* 如果成功
     .then(() => {
         console.log("数据库连接成功");
@@ -57,14 +61,17 @@ require("./config/passport")(passport)
 
 //* 配置根路由
 app.get("/", (req, res) => {
-    res.send("hello world")
-})
+        res.send("hello world")
+    })
+    //*  挂载api模块
+app.use("/api", api)
 
 //* 挂载users模块
-app.use("/api/users", users)
+// app.use("/api/users", users)
 
-//* 挂载profiles模块
-app.use("/api/profiles", profiles)
+// //* 挂载profiles模块
+// app.use("/api/profiles", profiles)
+
 
 //* 监听设置好的端口
 app.listen(port, () => {
