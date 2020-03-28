@@ -102,7 +102,7 @@ router.post("/login", (req, res) => {
                     .then(isMatch => {
                         if (!isMatch) {
                             //* 如果匹配不成功
-                            return res.status(400).json("密码匹配错误")
+                            return res.status(400).json("主人,密码不正确哦,您再想想~")
                         } else {
                             //* 如果匹配成功,也还需要通行证,使用token进行验证
                             //* 该方法有四个参数:规则,加密名字,{对象,比如过期时间},回调

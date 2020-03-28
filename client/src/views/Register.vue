@@ -50,7 +50,7 @@ export default {
 						uPattern2 = /[^0-9]/
 					    
 				  if( uPattern.test( value ) || !uPattern2.test( value ) ){
-						callback( new Error( '用户名只能包含大小写字母, 数字, 和下划线, 且不能是纯数字' ) );
+						callback( new Error( '用户名只能包含大小写字母, 数字和下划线,且不能是纯数字' ) );
 				  }
 				  callback();
 			  };
@@ -136,28 +136,23 @@ export default {
       this.$refs[formName].validate( valid =>{
         // console.log(valid);
         // *判断整个表单验证是否成功
-        console.log( 1 )
         if(valid){
           // *发送post请求,并且携带数据,注意不要忘了携带数据
           this.$axios.post('/api/users/register',this.registerUser)
           .then(res=>{
             // *成功后返回的消息
-            console.log(1);
-            
             this.$message({
               message:"恭喜您注册成功,现在开始您就是我的主人了,小书将竭诚为您服务~",
               type:"success"
             })
             // *注意跳转 这里要写在then里面
-            console.log(2);
-            
             this.$router.push("/login")
           })
           .catch(err=>{
            console.log(err);
           })
          
-        }else{ //*失败则return false
+        }else{ //* 失败则return false
           alert("请输入您的完整信息");
           return false
         }
