@@ -78,7 +78,9 @@ export default {
             const decode = jwt_decode(token);//* 解码 
             //* 设置本地缓存
             localStorage.setItem("eleToken",token)
-            
+            //* 商店派遣状态,第二个参数是自己封装的一个函数,用来判断解析出来的信息是否为空
+            this.$store.dispatch("setIsAuthenticated",!this.isEmpty(decode)) 
+            this.$store.dispatch("setUser",decode)
               // *注意跳转 这里要写在then里面
               this.$router.push("/index");
             })
@@ -91,6 +93,12 @@ export default {
           return false;
         }
       });
+    },
+    isEmpty(value){//* 判断传入的值是否为空
+      return (value === undefined || 
+      value === null ||
+      (typeof value ==="object" && Object.keys(value).length === 0) ||
+      (typeof value ==="string" && value.trim().length === 0))
     }
   },
   component: {}

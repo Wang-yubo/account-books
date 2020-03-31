@@ -4,6 +4,8 @@ import Index from "../views/Index.vue"
 import Register from "../views/Register.vue"
 import Login from "../views/Login.vue"
 import Nofind from "../views/404.vue"
+import ShowInfo from "../views/ShowInfo.vue"
+import Home from "../views/Home.vue"
 
 Vue.use(VueRouter);
 //* 一般来说进入一个app都是直接先进入login页,然后再进入主页比较合理,但是每次都要登录比较麻烦 . 
@@ -14,7 +16,12 @@ const routes = [{
 }, {
     path: "/index",
     name: "index",
-    component: Index
+    component: Index,
+    children: [
+        { path: "", component: Home },
+        { path: "/home", name: "home", component: Home },
+        { path: "/showinfo", name: "showinfo", component: ShowInfo }
+    ]
 }, {
     path: "/register",
     name: "register",
@@ -22,7 +29,7 @@ const routes = [{
 }, {
     path: "/login",
     name: "login",
-    component: Login
+    component: Login,
 }, {
     path: "*",
     name: "/404",

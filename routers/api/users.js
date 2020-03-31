@@ -53,9 +53,9 @@ router.post("/register", (req, res) => {
                 const newUser = new User({
                     name: req.body.name,
                     email: req.body.email,
+                    avatar,
                     password: req.body.password,
                     identity: req.body.identity,
-                    avatar,
                 })
 
                 //* 验证模块
@@ -111,9 +111,10 @@ router.post("/login", (req, res) => {
                             const rule = {
                                 id: user.id,
                                 name: user.name,
+                                avatar: user.avatar,
                                 identity: user.identity
                             }
-                            jwt.sign(rule, key, { expiresIn: 360 * 360 }, (err, token) => {
+                            jwt.sign(rule, key, { expiresIn: 60 * 60 }, (err, token) => {
                                 if (err) { throw err }
                                 //* 匹配成功时返回秘钥
                                 res.json({
