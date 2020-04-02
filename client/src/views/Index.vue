@@ -2,17 +2,23 @@
     <div class="index">
         <!-- 这是初始化内容 -->
         <HeadNav></HeadNav>
+        <LeftMenu></LeftMenu>
         <div class="rightContainer">
             <router-view></router-view>
         </div>
     </div>
 </template>
 <script>
+//* 引入HeadNav组件
 import HeadNav from "../components/HeadNav.vue"
+//* 引入
+import LeftMenu from "../components/LeftMenu.vue"
+
 export default {
     name:"index",
     components:{
-        HeadNav
+        HeadNav,
+        LeftMenu
     }
 }
 </script>
@@ -30,6 +36,5 @@ export default {
   /* width: 100%; */
   height: calc(100% - 71px);
   overflow: auto;
-  background-color:burlywood;
 }
 </style> 

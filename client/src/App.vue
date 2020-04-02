@@ -30,6 +30,6 @@ export default {
 </script>
 <style>
 #app {
-  background-color: beige;
+  /* background-color: beige; */
 }
 </style>

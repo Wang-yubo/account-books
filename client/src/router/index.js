@@ -6,6 +6,7 @@ import Login from "../views/Login.vue"
 import Nofind from "../views/404.vue"
 import ShowInfo from "../views/ShowInfo.vue"
 import Home from "../views/Home.vue"
+import FoundList from "../views/FoundList.vue"
 
 Vue.use(VueRouter);
 //* 一般来说进入一个app都是直接先进入login页,然后再进入主页比较合理,但是每次都要登录比较麻烦 . 
@@ -20,7 +21,8 @@ const routes = [{
     children: [
         { path: "", component: Home },
         { path: "/home", name: "home", component: Home },
-        { path: "/showinfo", name: "showinfo", component: ShowInfo }
+        { path: "/showinfo", name: "showinfo", component: ShowInfo },
+        { path: "/foundlist", name: "showinfo", component: FoundList }
     ]
 }, {
     path: "/register",
@@ -51,9 +53,6 @@ router.beforeEach((to, from, next) => {
     } else {
         isLogin ? next() : next('/login')
     }
-})
-
-
-;
+});
 
 export default router

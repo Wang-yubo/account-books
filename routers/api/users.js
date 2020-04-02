@@ -47,7 +47,7 @@ router.post("/register", (req, res) => {
                 return res.status(400).json("该邮箱已经被注册了")
             } else {
                 //* 设置一个默认的头像
-                var avatar = gravatar.url('emerleite@gmail.com', { s: '200', r: 'pg', d: '404' });
+                var avatar = gravatar.url('760478684@qq.com', { s: '200', r: 'pg', d: '404' });
                 // console.log("该邮箱可以使用");
                 //* 实例化一个新的对象,这个对象需要和数据库匹配 
                 const newUser = new User({
