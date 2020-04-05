@@ -8,6 +8,8 @@ import ShowInfo from "../views/ShowInfo.vue"
 import Home from "../views/Home.vue"
 import FoundList from "../views/FoundList.vue"
 
+
+
 Vue.use(VueRouter);
 //* 一般来说进入一个app都是直接先进入login页,然后再进入主页比较合理,但是每次都要登录比较麻烦 . 
 //* 如果直接进入index页,比较方便
@@ -22,7 +24,7 @@ const routes = [{
         { path: "", component: Home },
         { path: "/home", name: "home", component: Home },
         { path: "/showinfo", name: "showinfo", component: ShowInfo },
-        { path: "/foundlist", name: "showinfo", component: FoundList }
+        { path: "/foundlist", name: "foundlist", component: FoundList }
     ]
 }, {
     path: "/register",

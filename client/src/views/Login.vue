@@ -1,5 +1,5 @@
 <template>
-   <div class="login">
+   <div class="login" @keyup.enter="submitForm('loginForm')">
         <section class="form_container">
             <div class="manage_tip">
                 <span class="title">登录ACCOUNT-BOOKS</span>

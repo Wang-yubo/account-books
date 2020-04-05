@@ -35,8 +35,8 @@ export default {
   name: "head-nav",
   components: {},
   computed: {
-    user(){
-      return this.$store.getters.user
+    user() {
+      return this.$store.getters.user;
     }
   },
   // created() {
@@ -50,23 +50,23 @@ export default {
       }
       switch (item) {
         case "showinfo":
-          this.showinfo()
+          this.showinfo();
           break;
         case "logout":
-         this.logout()
+          this.logout();
           break;
       }
     },
     showinfo() {
-        //todo 跳转到用户信息组件
-        this.$router.push("/showinfo")
-        
+      //todo 跳转到用户信息组件
+      //* 这里一定要加上catch。具体原因看http://www.wyb.plus/index.php/archives/1336/
+      this.$router.push("/showinfo").catch(err=>{err})
     },
     logout() {
-        //todo 登出,清空token缓存,清空认证状态,跳转到login页
-        localStorage.removeItem("eleToken")
-        this.$store.dispatch("clearCurrentState")
-        this.$router.push("/login")
+      //todo 登出,清空token缓存,清空认证状态,跳转到login页
+      localStorage.removeItem("eleToken");
+      this.$store.dispatch("clearCurrentState");
+      this.$router.push("/login");
     }
   }
 };

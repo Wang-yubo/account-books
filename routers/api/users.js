@@ -107,14 +107,14 @@ router.post("/login", (req, res) => {
                             //* 如果匹配成功,也还需要通行证,使用token进行验证
                             //* 该方法有四个参数:规则,加密名字,{对象,比如过期时间},回调
                             //* 规则一般是匹配数据库中每个字段的id,因为这是唯一值
-                            // *创建规则
+                            //* 创建规则
                             const rule = {
                                 id: user.id,
                                 name: user.name,
                                 avatar: user.avatar,
                                 identity: user.identity
                             }
-                            jwt.sign(rule, key, { expiresIn: 60 * 60 }, (err, token) => {
+                            jwt.sign(rule, key, { expiresIn: 60*60 }, (err, token) => {
                                 if (err) { throw err }
                                 //* 匹配成功时返回秘钥
                                 res.json({

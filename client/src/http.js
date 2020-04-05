@@ -31,16 +31,34 @@ axios.interceptors.response.use(response => {
     endLoading();
     return response;
 }, error => {
-    //* 这里使用了elementui的Message模块
-    //* 根据返回的错误信息解构状态码
-    const { status } = error.response
-        //* 根据状态码发送不同的错误信息
-    if (status === 401) {
-        Message.error("亲爱的主人,您的身份认证已过期,请重新登陆~")
-    }
 
-    Message.error(error.response.data);
+
+    // const { status } = error.response
+    // if (status === 401) {
+    //     Message.error("亲爱的主人,您的身份认证已过期,请重新登陆~")
+    // }
+
+    // Message.error(error.response.data);
+    // endLoading();
+    // return Promise.reject(error);
+    //* 如果出错则先结束加载
     endLoading();
-    return Promise.reject(error);
+    //* 报告返回的错误
+    Message.error(error.response.data)
+        //* 根据错误信息解构出状态码
+    const { status } = error.response
+        //* 根据状态码进行操作
+    if (status == 401) {
+        //* 报告错误信息
+        Message.error("您的身份验证已过期,请重新登录");
+        //* 清除缓存
+        localStorage.removeItem("eleToken")
+            //* 然后跳转到登录页面
+        router.push("/login")
+    }
+    return Promise.reject(error)
+
+
+
 })
 export default axios;
