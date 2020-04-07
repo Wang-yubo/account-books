@@ -1,6 +1,8 @@
 <template>
   <div class="logFund">
-    <el-dialog title="添加资金信息" :visible.sync="dialog.show">
+    <el-dialog 
+    :title="dialog.title" 
+    :visible.sync="dialog.show">
       <div class="form">
         <el-form ref="form" :model="formData" label-width="80px" :rules="form_rules">
           <!-- 类型 -->
@@ -50,7 +52,8 @@
 export default {
   name: "dialogfund",
   props: {
-    dialog: Object
+    dialog: Object,
+    formData:Object
   },
   data() {
     return {
@@ -65,15 +68,6 @@ export default {
         "餐饮美食",
         "其他开支"
       ],
-      formData: {
-        type: "",
-        descript: "",
-        income: "",
-        expend: "",
-        cash: "",
-        remake: "",
-        id: ""
-      },
       form_rules: {
         descript: [
           { required: true, message: "收支描述不能为空！", trigger: "blur" }
@@ -90,7 +84,23 @@ export default {
   },
   methods: {
     onSubmit(form){
-
+      this.$refs[form].validate(valid=>{
+        if(valid){
+          const url = this.dialog.option=="add"?"add":`edit/${this.formData.id}`
+          this.$axios
+          .post(`/api/profile/${url}`,this.formData)
+          .then(res=>{
+            this.$message({
+              message: '数据保存成功',
+              type: 'success'
+            })
+            //* 提交之后关闭会话
+             this.dialog.show=false
+            //* 然后让父组件数据更新
+            this.$emit('updata')
+          })
+        }
+      })
     }
   },
 };
