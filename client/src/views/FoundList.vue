@@ -6,7 +6,7 @@
           <el-date-picker v-model="search_data.startTime" type="datetime" placeholder="选择开始时间"></el-date-picker>--
           <el-date-picker v-model="search_data.endTime" type="datetime" placeholder="选择结束时间"></el-date-picker>
         </el-form-item>
-        </el-form-item>
+        
         <el-form-item>
           <el-button type="primary" size="small" icon="search" @click="onScreeoutMoney()">筛选</el-button>
         </el-form-item>
